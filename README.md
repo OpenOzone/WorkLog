@@ -1,6 +1,4 @@
-# Chrome Extension Template with React, TypeScript, and TailwindCSS
-
-A modern, maintainable Chrome extension template built with React, TypeScript, and TailwindCSS.
+# Chrome Extension with React, TypeScript, and TailwindCSS
 
 ## Features
 
@@ -10,7 +8,6 @@ A modern, maintainable Chrome extension template built with React, TypeScript, a
 - 🎨 TailwindCSS for utility-first styling
 - 🧩 Chrome Extension Manifest V3
 - 🔧 ESLint + Prettier for code quality
-- 👷 GitHub Actions for automated builds
 
 ## Project Structure
 
@@ -28,7 +25,7 @@ A modern, maintainable Chrome extension template built with React, TypeScript, a
 
 ## Getting Started
 
-1. Clone this template
+1. Clone this repository
 2. Install dependencies:
    ```bash
    npm install
