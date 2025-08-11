@@ -1,8 +1,17 @@
-export interface MarkerProps {
+export interface Marker {
   readonly id: number;
   readonly hour: number;
   readonly minute: number;
-  readonly handleUpdateMarker?: (id: number, hour: number, minute: number) => void;
+  readonly task: string;
+}
+
+export interface MarkerProps extends Marker {
+  readonly handleUpdateMarker?: ({ id, hour, minute, task }: Marker) => void;
+  readonly handleRemoveMarker: () => void;
+}
+
+export interface MarkerRemoverProps {
+  handleRemove: () => void;
 }
 
 export interface IntegerInputProps {
@@ -11,6 +20,14 @@ export interface IntegerInputProps {
   readonly maxLength: number;
   readonly value: number;
   readonly onChange?: (value: number) => void;
+}
+
+export interface TaskInputProps {
+  readonly id: string;
+  readonly title: string;
+  readonly maxLength: number;
+  readonly value: string;
+  readonly onChange?: (value: string) => void;
 }
 
 export interface ButtonProps {
