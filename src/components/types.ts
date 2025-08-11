@@ -10,7 +10,7 @@ export interface MarkerProps extends Marker {
   readonly handleRemoveMarker: () => void;
 }
 
-export interface MarkerOptionsProps {
+export interface MarkerRemoverProps {
   handleRemove: () => void;
 }
 

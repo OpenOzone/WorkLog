@@ -71,6 +71,6 @@ button:focus-visible {
   }
 }
 
-.scroll-gutter{
+.scroll-gutter {
   scrollbar-gutter: stable;
 }
