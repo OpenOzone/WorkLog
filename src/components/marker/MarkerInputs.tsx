@@ -1,13 +1,15 @@
 import { useRef } from 'react';
-import { IntegerInput } from './IntegerInput';
-import { TaskInput } from './TaskInput';
+import { IntegerInput } from '../IntegerInput';
+import { TaskInput } from '../TaskInput';
 
-import type { MarkerProps } from './types';
+import type { MarkerProps } from '../types';
 
 const MarkerInputs = (props: Readonly<MarkerProps>) => {
   const hourRef = useRef<HTMLInputElement>(null);
   const minutesRef = useRef<HTMLInputElement>(null);
   const taskRef = useRef<HTMLInputElement>(null);
+
+  const isNumberIndex = (props.index + 1) % 2 === 0;
 
   const handleHourChange = (value: number) => {
     let hour = value;
@@ -38,7 +40,7 @@ const MarkerInputs = (props: Readonly<MarkerProps>) => {
   };
 
   return (
-    <div className="flex flex-row gap-2 py-1">
+    <div className="relative flex flex-row gap-2 py-1">
       <div className="flex flex-row">
         <IntegerInput
           id="hour"
@@ -58,14 +60,16 @@ const MarkerInputs = (props: Readonly<MarkerProps>) => {
           ref={minutesRef}
         />
       </div>
-      <TaskInput
-        id="task"
-        title="Atividade"
-        maxLength={59}
-        onChange={handleTaskChange}
-        value={props.task}
-        ref={taskRef}
-      />
+
+        <TaskInput
+          id="task"
+          title="Atividade"
+          maxLength={59}
+          onChange={handleTaskChange}
+          disabled={isNumberIndex}
+          value={isNumberIndex ? 'Referente a anterior' : props.task}
+          ref={taskRef}
+        />
     </div>
   );
 };

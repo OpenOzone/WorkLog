@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface Marker {
   readonly id: number;
   readonly hour: number;
@@ -8,7 +10,7 @@ export interface Marker {
 export interface MarkerProps extends Marker {
   readonly handleUpdateMarker?: ({ id, hour, minute, task }: Marker) => void;
   readonly handleRemoveMarker: () => void;
-  readonly isFirst: boolean;
+  readonly index: number;
 }
 
 export interface MarkerRemoverProps {
@@ -29,10 +31,20 @@ export interface TaskInputProps {
   readonly maxLength: number;
   readonly value: string;
   readonly onChange?: (value: string) => void;
+  readonly disabled?: boolean;
 }
 
 export interface ButtonProps {
   readonly label: string;
   readonly btnClassName?: string;
   readonly onClick?: () => void;
+}
+
+export type AutocompleteItem = {
+  value: string;
+  label: string;
+};
+export interface BaseAutocompleteProps {
+  children?: ReactNode;
+  items?: AutocompleteItem[];
 }

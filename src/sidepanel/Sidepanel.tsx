@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 
-import { Marker } from '@/components/Marker';
+import { Marker } from '@/components/marker/Marker';
 import { Button } from '@/components/Button';
 
 import type { Marker as IMarker } from '@/components/types';
 import type { MarkerProps } from './types';
 import { generateId } from './utils';
+import { Autocomplete } from '@/components/Autocomplete';
 
 const initialMarkers: MarkerProps[] = [{ id: 1, hour: 0, minute: 0, task: '' }];
 
@@ -96,7 +97,7 @@ function Sidepanel() {
             <div className="flex flex-col justify-center items-center gap-3">
               {markers.map((marker, index) => (
                 <Marker
-                  isFirst={index === 0}
+                  index={index}
                   key={marker.id}
                   id={marker.id}
                   hour={marker.hour}
