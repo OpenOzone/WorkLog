@@ -1,19 +1,36 @@
+import { useRef } from 'react';
 import { IntegerInput } from './IntegerInput';
 import { TaskInput } from './TaskInput';
 
 import type { MarkerProps } from './types';
 
 const MarkerInputs = (props: Readonly<MarkerProps>) => {
-  const handleHourChange = (value: number) => {
-    if (value < 0 || value > 23) return props.handleUpdateMarker?.({ ...props, hour: 0 });
+  const hourRef = useRef<HTMLInputElement>(null);
+  const minutesRef = useRef<HTMLInputElement>(null);
+  const taskRef = useRef<HTMLInputElement>(null);
 
-    props.handleUpdateMarker?.({ ...props, hour: value });
+  const handleHourChange = (value: number) => {
+    let hour = value;
+
+    if (value < 0 || value > 23) hour = 0;
+    props.handleUpdateMarker?.({ ...props, hour });
+
+    if (value > 9 && minutesRef.current && hourRef.current) {
+      hourRef.current.valueAsNumber = value;
+      minutesRef.current.focus();
+    }
   };
 
   const handleMinuteChange = (value: number) => {
-    if (value < 0 || value > 59) return props.handleUpdateMarker?.({ ...props, minute: 0 });
+    let minute = value;
 
-    props.handleUpdateMarker?.({ ...props, minute: value });
+    if (value < 0 || value > 59) minute = 0;
+    props.handleUpdateMarker?.({ ...props, minute });
+
+    if (value > 9 && minutesRef.current && taskRef.current) {
+      minutesRef.current.valueAsNumber = value;
+      taskRef.current.focus();
+    }
   };
 
   const handleTaskChange = (value: string) => {
@@ -29,6 +46,7 @@ const MarkerInputs = (props: Readonly<MarkerProps>) => {
           maxLength={24}
           onChange={handleHourChange}
           value={props.hour}
+          ref={hourRef}
         />
         <span className="mt-[27px] text-black text-lg">:</span>
         <IntegerInput
@@ -37,6 +55,7 @@ const MarkerInputs = (props: Readonly<MarkerProps>) => {
           maxLength={59}
           onChange={handleMinuteChange}
           value={props.minute}
+          ref={minutesRef}
         />
       </div>
       <TaskInput
@@ -45,6 +64,7 @@ const MarkerInputs = (props: Readonly<MarkerProps>) => {
         maxLength={59}
         onChange={handleTaskChange}
         value={props.task}
+        ref={taskRef}
       />
     </div>
   );
