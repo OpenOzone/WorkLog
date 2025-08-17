@@ -8,6 +8,7 @@ export interface Marker {
 export interface MarkerProps extends Marker {
   readonly handleUpdateMarker?: ({ id, hour, minute, task }: Marker) => void;
   readonly handleRemoveMarker: () => void;
+  readonly isFirst: boolean;
 }
 
 export interface MarkerRemoverProps {

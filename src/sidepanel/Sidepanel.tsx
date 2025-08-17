@@ -94,8 +94,9 @@ function Sidepanel() {
         <div className="space-y-4">
           <div className="p-4 bg-white rounded-lg shadow">
             <div className="flex flex-col justify-center items-center gap-3">
-              {markers.map(marker => (
+              {markers.map((marker, index) => (
                 <Marker
+                  isFirst={index === 0}
                   key={marker.id}
                   id={marker.id}
                   hour={marker.hour}

@@ -8,7 +8,7 @@ function Marker(props: Readonly<MarkerProps>) {
     <div className="relative flex flex-row w-full rounded-l-lg shadow-lg">
       <MarkerInputs {...props} />
 
-      <MarkerRemover handleRemove={props.handleRemoveMarker} />
+      {!props.isFirst && <MarkerRemover handleRemove={props.handleRemoveMarker} />}
     </div>
   );
 }
