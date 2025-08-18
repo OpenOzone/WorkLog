@@ -30,7 +30,13 @@ export function Autocomplete(props: Readonly<BaseAutocompleteProps>) {
                 </CommandItem>
               ))}
             </CommandGroup>
-            {props.items?.length === 0 && <CommandItem>Criar item +</CommandItem>}
+            {props.items?.length === 0 && props?.isEnableCreateItem && (
+              <CommandItem onClick={() => {
+                props?.handleCreateItem
+                console.log('Teste')
+              }}>Criar item +</CommandItem>
+              
+            )}
           </CommandList>
         </Command>
       </PopoverContent>

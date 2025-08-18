@@ -44,7 +44,12 @@ export type AutocompleteItem = {
   value: string;
   label: string;
 };
+
 export interface BaseAutocompleteProps {
-  children?: ReactNode;
-  items?: AutocompleteItem[];
+  children: ReactNode;
+  items: AutocompleteItem[];
+  isEnableCreateItem?: boolean;
+  handleCreateItem?: VoidFunction;
 }
+
+export interface Task extends AutocompleteItem {}
