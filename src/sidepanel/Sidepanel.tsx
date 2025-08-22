@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 
-import { Marker } from '@/components/Marker';
+import { Marker } from '@/components/marker/Marker';
 import { Button } from '@/components/Button';
-import { MarkerProps } from './types';
 
-const initialMarkers: MarkerProps[] = [{ id: 1, hour: 0, minute: 0 }];
+import type { Marker as IMarker } from '@/components/types';
+import type { MarkerProps } from './types';
+import { generateId } from './utils';
+import { Autocomplete } from '@/components/Autocomplete';
+
+const initialMarkers: MarkerProps[] = [{ id: 1, hour: 0, minute: 0, task: '' }];
 
 function Sidepanel() {
   const [markers, setMarkers] = useState<MarkerProps[]>(initialMarkers);
@@ -47,21 +51,31 @@ function Sidepanel() {
   const handleAddMarker = () => {
     console.warn(markers[0]);
 
-    setMarkers([...markers, { id: markers.length + 1, hour: 0, minute: 0 }]);
+    setMarkers([
+      ...markers,
+      {
+        id: generateId(),
+        hour: 0,
+        minute: 0,
+        task: '',
+      },
+    ]);
 
     calculateTotalTime();
   };
 
-  const handleRemoveMarker = () => {
+  const handleRemoveMarker = (id: number) => {
     if (markers.length <= 1) return;
 
-    setMarkers(markers.slice(0, -1));
+    setMarkers(prev => prev.filter(marker => marker.id != id));
 
     calculateTotalTime();
   };
 
-  const handleUpdateMarker = (id: number, hour: number, minute: number) => {
-    setMarkers(markers.map(marker => (marker.id === id ? { ...marker, hour, minute } : marker)));
+  const handleUpdateMarker = ({ id, hour, minute, task }: IMarker) => {
+    setMarkers(
+      markers.map(marker => (marker.id === id ? { ...marker, hour, minute, task } : marker))
+    );
   };
 
   useEffect(() => {
@@ -77,17 +91,20 @@ function Sidepanel() {
       </div>
 
       {/* Content Area */}
-      <div className="p-4 overflow-y-auto">
+      <div className="p-4 overflow-y-auto scroll-gutter">
         <div className="space-y-4">
           <div className="p-4 bg-white rounded-lg shadow">
-            <div className="flex flex-col justify-center items-center">
-              {markers.map(marker => (
+            <div className="flex flex-col justify-center items-center gap-3">
+              {markers.map((marker, index) => (
                 <Marker
+                  index={index}
                   key={marker.id}
                   id={marker.id}
                   hour={marker.hour}
                   minute={marker.minute}
+                  task={marker.task}
                   handleUpdateMarker={handleUpdateMarker}
+                  handleRemoveMarker={() => handleRemoveMarker(marker.id)}
                 />
               ))}
             </div>
@@ -98,13 +115,6 @@ function Sidepanel() {
                 label="Adicionar marcador"
                 onClick={handleAddMarker}
                 btnClassName="text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-              />
-            </div>
-            <div className="mt-3 space-y-2">
-              <Button
-                label="Remover marcador"
-                onClick={handleRemoveMarker}
-                btnClassName="text-white bg-red-600 rounded-lg hover:bg-red-700"
               />
             </div>
           </div>
