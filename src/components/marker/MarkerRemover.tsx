@@ -1,6 +1,6 @@
 import { IoCloseSharp } from 'react-icons/io5';
 
-import type { MarkerRemoverProps } from './types';
+import type { MarkerRemoverProps } from '../types';
 
 function MarkerRemover({ handleRemove }: Readonly<MarkerRemoverProps>) {
   return (
