@@ -11,7 +11,7 @@ import type { MarkerProps } from '@/sidepanel/types';
 const initialMarkers: MarkerProps[] = [{ id: 1, hour: 0, minute: 0, task: '' }];
 
 const WorkLogTab = () => {
-  const [markers, setMarkers] = useState<MarkerProps[]>(initialMarkers);
+  const [markers, setMarkers] = useState<MarkerProps[]>(initialMarkers ?? []);
   const [totalTime, setTotalTime] = useState<string>();
   const [totalTimeDecimal, setTotalTimeDecimal] = useState<string>();
 
