@@ -1,16 +1,9 @@
 import { lazy } from 'react';
-  
-import { Marker } from '@/components/marker/Marker';
+
 import { Tabs } from '@/components/Tabs/Tabs';
-import { Button } from '@/components/Button';
 
-import type { Marker as IMarker } from '@/components/types';
-import type { MarkerProps } from './types';
-import { generateId } from './utils';
-
-const WorkLogTab = lazy(() => import('@/components/Tabs/WorklogTab'));        
-        
-const initialMarkers: MarkerProps[] = [{ id: 1, hour: 0, minute: 0, task: '' }];
+const WorkLogTab = lazy(() => import('@/components/Tabs/WorklogTab'));
+const TesteTab = lazy(() => import('@/components/Tabs/TesteTab'));
 
 function Sidepanel() {
   return (
@@ -22,9 +15,14 @@ function Sidepanel() {
 
       {/* Content Area */}
       <div className="p-4 overflow-y-auto scroll-gutter">
-        <Tabs tabs={[{ label: 'Worklog', content: WorkLogTab }]} />
-        
-        <div className="space-y-4">
+        <Tabs
+          tabs={[
+            { label: 'Worklog', content: WorkLogTab },
+            { label: 'Teste', content: TesteTab },
+          ]}
+        />
+
+        {/* <div className="space-y-4">
           <div className="p-4 bg-white rounded-lg shadow">
             <div className="flex flex-col justify-center items-center gap-3">
               {markers.map((marker, index) => (
@@ -62,7 +60,7 @@ function Sidepanel() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

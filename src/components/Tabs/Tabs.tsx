@@ -20,6 +20,7 @@ const Tabs = ({ tabs }: TabsProps) => {
     setRenderedTabs(prev => new Set(prev).add(index));
   };
 
+  console.log(activeTab)
   return (
     <div>
       <div className="flex flex-row border-b">
@@ -38,7 +39,7 @@ const Tabs = ({ tabs }: TabsProps) => {
       <div>
         {tabs.map((tab, index) =>
           renderedTabs.has(index) ? (
-            <div key={index} className={`${activeTab === index ? 'block' : 'none'}`}>
+            <div key={index} className={`${activeTab === index ? 'block' : 'hidden'}`}>
               <Suspense fallback={<div>Loading...</div>}>
                 <TabContent Content={tab.content} />
               </Suspense>
