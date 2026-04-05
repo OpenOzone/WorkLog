@@ -3,7 +3,7 @@ import { lazy } from 'react';
 import { Tabs } from '@/components/Tabs/Tabs';
 
 const WorkLogTab = lazy(() => import('@/components/Tabs/WorklogTab'));
-const TesteTab = lazy(() => import('@/components/Tabs/TesteTab'));
+const Calculator = lazy(() => import('@/components/Tabs/Calculator'));
 
 function Sidepanel() {
   return (
@@ -18,7 +18,7 @@ function Sidepanel() {
         <Tabs
           tabs={[
             { label: 'Worklog', content: WorkLogTab },
-            { label: 'Teste', content: TesteTab },
+            { label: 'Calculator', content: Calculator },
           ]}
         />
       </div>

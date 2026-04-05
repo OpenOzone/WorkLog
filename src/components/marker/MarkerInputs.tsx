@@ -61,15 +61,15 @@ const MarkerInputs = (props: Readonly<MarkerProps>) => {
         />
       </div>
 
-        <TaskInput
-          id="task"
-          title="Atividade"
-          maxLength={59}
-          onChange={handleTaskChange}
-          disabled={isNumberIndex}
-          value={isNumberIndex ? 'Referente a anterior' : props.task}
-          ref={taskRef}
-        />
+      <TaskInput
+        id="task"
+        title="Atividade"
+        maxLength={59}
+        onChange={handleTaskChange}
+        disabled={isNumberIndex}
+        value={isNumberIndex ? 'Referente a anterior' : props.task}
+        ref={taskRef}
+      />
     </div>
   );
 };
